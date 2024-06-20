@@ -12,7 +12,7 @@ RUN npm run build --prod || (cat /root/.npm/_logs/*-debug.log && false)
 # Stage 2: Serve Angular application using nginx
 FROM nginx:1.21-alpine
 
-COPY --from=build /app/dist/CiCdTest /usr/share/nginx/html
+COPY --from=build /app/dist/ci-cd-test /usr/share/nginx/html
 
 EXPOSE 80
 
