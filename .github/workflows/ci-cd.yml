@@ -15,18 +15,19 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22.2.0'
+          node-version: '16.0.0' # Use a stable version of Node.js
 
       - name: Install dependencies
         run: npm install
 
       - name: Build Angular app
-        run: npm run build --prod
+        run: |
+          npm run build --prod || (cat /root/.npm/_logs/*-debug.log && false) # Output npm debug log on failure
 
       - name: Build Docker image
         run: |
           docker build -t my-angular-app .
-          docker tag CiCdAngular:latest harshithffc/CiCdAngular:latest
+          docker tag my-angular-app:latest harshithffc/CiCdAngular:latest
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
