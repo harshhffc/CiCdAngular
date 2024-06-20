@@ -12,6 +12,7 @@ RUN npm run build --prod
 # Stage 2: Serve Angular application using nginx
 FROM nginx:1.21-alpine
 
+
 # Copy built Angular app from Stage 1 to Nginx public directory
 COPY --from=build /app/dist/ci-cd-test /usr/share/nginx/html
 
