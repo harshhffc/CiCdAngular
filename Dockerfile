@@ -14,9 +14,6 @@ FROM nginx:1.21-alpine
 
 COPY --from=build /app/dist/ci-cd-test /usr/share/nginx/html
 
-# Add custom Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 EXPOSE 4200
 
 CMD ["nginx", "-g", "daemon off;"]
