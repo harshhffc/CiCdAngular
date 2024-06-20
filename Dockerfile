@@ -14,7 +14,7 @@ FROM nginx:1.21-alpine
 
 
 # Copy built Angular app from Stage 1 to Nginx public directory
-COPY --from=build /app/dist/ci-cd-test /usr/share/nginx/html
+COPY --from=build /app/dist/ci-cd-test/browser /usr/share/nginx/html
 
 # Copy custom Nginx configuration file if needed (optional)
 # COPY nginx-custom.conf /etc/nginx/conf.d/reverse_proxy.conf
