@@ -18,10 +18,10 @@ jobs:
           node-version: '22.2.0'
 
       - name: Install dependencies
-        run: ng install
+        run: npm install
 
       - name: Build Angular app
-        run: ng build --configuration production
+        run: npm run build --prod
 
       - name: Build Docker image
         run: |

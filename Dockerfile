@@ -4,10 +4,10 @@ FROM node:14 as build
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN ng install
+RUN npm install
 
 COPY . .
-RUN ng build --configuration production
+RUN npm run build --prod
 
 # Stage 2: Serve Angular application using nginx
 FROM nginx:1.21-alpine
