@@ -16,7 +16,7 @@ FROM nginx:1.21-alpine
 COPY --from=build /app/dist/ci-cd-test /usr/share/nginx/html
 
 # Copy custom Nginx configuration file if needed (optional)
-COPY nginx-custom.conf /etc/nginx/conf.d/reverse_proxy.conf
+# COPY nginx-custom.conf /etc/nginx/conf.d/reverse_proxy.conf
 
 # Expose port 4200 (the port your Angular app will be served on)
 EXPOSE 4200
