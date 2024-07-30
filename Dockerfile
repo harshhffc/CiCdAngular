@@ -1,26 +1,29 @@
-# Stage 1: Build Angular application
+# Stage 1: Build the Angular application
 FROM node:18.19.0 as build
 
+# Set the working directory
 WORKDIR /app
 
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
+# Copy the rest of the application
 COPY . .
+
+# Build the Angular application
 RUN npm run build --prod
 
-# Stage 2: Serve Angular application using nginx
-FROM nginx:1.21-alpine
+# Stage 2: Serve the application with httpd
+FROM httpd:2.4
 
+# Copy the built Angular application into the httpd directory
+COPY --from=build /app/dist/ci-cd-test/browser /var/www/html/
 
-# Copy built Angular app from Stage 1 to Nginx public directory
-COPY --from=build /app/dist/ci-cd-test/browser /usr/share/nginx/html
+# Expose port 80
+EXPOSE 80
 
-# Copy custom Nginx configuration file if needed (optional)
-# COPY nginx-custom.conf /etc/nginx/conf.d/reverse_proxy.conf
-
-# Expose port 4200 (the port your Angular app will be served on)
-EXPOSE 4200
-
-# Start Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Start the httpd server
+CMD ["httpd-foreground"]

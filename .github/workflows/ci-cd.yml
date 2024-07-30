@@ -22,7 +22,7 @@ jobs:
 
       - name: Build Angular app
         run: |
-          npm run build --prod || (cat /home/runner/work/_temp/_github_home/_npm/_logs/*-debug.log && false) # Output npm debug log on failure
+          npm run build --prod 
 
       - name: Build Docker image
         run: |
@@ -50,4 +50,4 @@ jobs:
             docker pull harshithffc/cicdangular:latest
             docker stop $(docker ps -q --filter ancestor=harshithffc/cicdangular:latest)
             docker rm $(docker ps -q --filter ancestor=harshithffc/cicdangular:latest)
-            docker run -d -p 4200:4200 harshithffc/cicdangular:latest
+            docker run -d -p 4200:80 harshithffc/cicdangular:latest
