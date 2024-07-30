@@ -20,11 +20,10 @@ RUN npm run build --prod
 FROM httpd:2.4
 
 # Copy the built Angular application into the httpd directory
-COPY --from=build /app/dist/ci-cd-test/browser /var/www/html/
+COPY --from=build /app/dist/ci-cd-test /usr/local/apache2/htdocs/
 
 # Expose port 80
 EXPOSE 80
 
 # Start the httpd server
 CMD ["httpd", "-D", "FOREGROUND"]
-

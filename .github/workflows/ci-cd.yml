@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.19.0' # Use a compatible version of Node.js
+          node-version: '18.19.0'
 
       - name: Install dependencies
         run: npm install
@@ -33,7 +33,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-          
+
       - name: Push Docker image to Docker Hub
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
 
@@ -49,4 +49,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
             docker stop cicdangular || true
             docker rm cicdangular || true
-            docker run -d --name cicdangular -p 4200:80 ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
+            docker run -d --name cicdangular -p 80:80 ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
