@@ -49,4 +49,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
             docker stop cicdangular || true
             docker rm cicdangular || true
-            docker run -d --name cicdangular -p 80:80 ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
+            docker run -d --name cicdangular -p 4300:80 ${{ secrets.DOCKER_HUB_USERNAME }}/cicdangular:latest
