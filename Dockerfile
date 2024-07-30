@@ -26,4 +26,5 @@ COPY --from=build /app/dist/ci-cd-test/browser /var/www/html/
 EXPOSE 80
 
 # Start the httpd server
-CMD ["httpd-foreground"]
+CMD ["httpd", "-D", "FOREGROUND"]
+
